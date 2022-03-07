@@ -1,0 +1,271 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Image Editor</title>
+        <meta name="viewport" content="width=device-width, initial-scale=1.0">
+        <script src="https://kit.fontawesome.com/9d89bb858d.js" crossorigin="anonymous"></script>
+        <script src="https://unpkg.com/sweetalert/dist/sweetalert.min.js"></script>   
+        <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script> 
+        <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+        <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Audiowide|Sofia|Trirong">        
+        <link href="css.css" rel="stylesheet">
+        <script src="js.js"></script>
+    </head>
+    <body>
+    <div id="l-box" class="lbox">
+        <div class="loader">
+            
+        </div>
+    </div>
+    <div class="top">
+        <img class="logo" src="—Pngtree—house and city paint logo_5442163.png" style="height: 35px;width: 35px;"/>
+        <span class="top-txt">Image Editor</span>
+        <!-- <span class="navbar">&#xf0c9;</span> -->
+    </div>
+    <section id="editor">
+        <div id="mn" class="main">
+            <img id="image" class="m-img" src="https://th.bing.com/th/id/R.a52a7b80f645313c74c652daa67357f6?rik=lJXLOjhmSwiZWg&riu=http%3a%2f%2fwww.wallpapers13.com%2fwp-content%2fuploads%2f2015%2f11%2fPink-Flowers-Dahlia-flower-plants-plantation-outdoor-green-leaves-buds-close-up-image-wallpaper-HD-resolution-3840x2400.jpg&ehk=LRaVeRPbMnxpfrVAajRi0kONuuGj72Tb5f2zKC4GD64%3d&risl=&pid=ImgRaw&r=0"/>                  
+        </div>
+    </section>
+    <div id="f-box" class="f-box">
+            </div>
+        <main>
+        <button class="button">Tools</button>
+        <div class="box">
+            <div class="row" id="toolsRow">
+                <span id="rotate" class="row-icon" onclick="rotate()">&#xf2f9;</span>
+                <span class="row-txt" onclick="rotate()">Rotate</span>
+                <span id="zoomIn" class="row-icon" onclick="zoomIn()">&#xf00e;</span>
+                <span class="row-txt" onclick="zoomIn()">Zoom-in</span>
+                <span id="zoomOut" class="row-icon" onclick="zoomOut()">&#xf010;</span>
+                <span class="row-txt" onclick="zoomOut()">Zoom-out</span>
+                <span id="upload" class="row-icon" onclick="upload()">&#xf07c;</span>
+                <span class="row-txt" onclick="upload()">Upload</span>
+                <span id="addfile" class="row-icon" onclick="addText()" style="font-weight:bolder;">T<font style="font-size:14px;">T</font></span>
+                <span class="row-txt" onclick="addText()">Add Text</span>
+                <span class="row-icon"></span>
+                <span class="row-txt"></span>
+            </div>
+            
+            <ul id="txtEdit" style="display: none;">
+                <li>&#xf034;<font class="top-left">Font Size</font><input id="s10" type="range" min="0" max="40" value="20" oninput="slider()"><font id="p10" class="top-right"></font></li>
+                <li style="font-weight:bolder;">B<font class="top-left">Font Weight</font><input id="s11" type="range" min="0" max="1000" value="600" oninput="slider()"><font id="p11" class="top-right"></font></li>    
+                <li style="margin-bottom: -15px;">&#xf53f;<font class="top-left">Font Color</font><font id="p12" class="top-right"></font></li>
+                <input id="s12" type="color" value="#ffffff" oninput="slider()">
+                <button style="width: 70px;margin-left: calc(50% - 158px);" onclick="back()">Back</button>
+                <button id="b" style="font-weight: bolder;" onclick="bold()">B</buttpn>
+                <button id="u" style="text-decoration: underline;" onclick="uline()">U</button>
+                <button id="s" style="text-decoration: line-through;" onclick="strike()">O</button>
+                <button style="width: 70px;" onclick="reset()">Reset</button>
+            </ul>
+            <ul id="txtEdit2" style="display: none;flex-direction: column;justify-content: center;align-items: center;">
+                <div class="u-box">
+                    <input class="search" id="s-txt" type="text" placeholder="Enter Image Url" style="height: 30px;width: 80%;border-radius: 5px;background-color: rgb(238, 235, 71);color:rgb(174, 0, 255);border: solid 5px gold;padding-left: 10px;"><div class="s-bar" style="margin: -1px 0 0 5px;padding: 3px;border:solid 2px rgb(255, 217, 0);border-radius: 5px;" onclick="search()">&#xf002;</div>
+                </div>
+                <P>or</P>
+                <p style="margin-top: 25px;">
+                    <div class="fileUpload">
+                        <span>Upload</span>
+                        <input id="uploadBtn" type="file" class="upload" oninput="myFile()">
+                    </div> 
+                    <div style="display: flex;flex-direction: row;">
+                        <button style="width: 80px;" onclick="iReset()">Reset</button>
+                        <button style="width: 80px;" onclick="back()">Back</button>
+                    </div>
+                </p>
+            </ul>
+        </div>
+        <button class="button">Effects</button>
+        <div class="box">
+            <ul>
+                <li>&#xf185;<font class="top-left">Brightness</font><input id="s1" type="range" min="0" max="200" value="100" oninput="slider()"><font id="p1" class="top-right">0%</font></li>
+                <li>&#xf042;<font class="top-left">Contrast</font><input id="s2" type="range" min="0" max="200" value="100" oninput="slider()"><font id="p2" class="top-right">0%</font></li>
+                <li>&#xf46a;<font class="top-left">Saturation</font><input id="s3" type="range" min="0" max="200" value="100" oninput="slider()"><font id="p3" class="top-right">0%</font></li>
+                <li>&#xf261;<font class="top-left">Opacity</font><input id="s4" type="range" min="0" max="100" value="100" oninput="slider()"><font id="p4" class="top-right">0%</font></li>
+                <li>&#xf753;<font class="top-left">Grayscale</font><input id="s5" type="range" min="0" max="100" value="0" oninput="slider()"><font id="p5" class="top-right">0%</font></li>
+                <li>&#xf50a;<font class="top-left">Blur</font><input id="s6" type="range" min="0" max="25" value="0" oninput="slider()"><font id="p6" class="top-right">0%</font></li>
+                <li>&#xf51f;<font class="top-left">Hue-rotate</font><input id="s7" type="range" min="0" max="360" value="360" oninput="slider()"><font id="p7" class="top-right">0%</font></li>
+                <li>&#xf1a3;<font class="top-left">Sepia</font><input id="s8" type="range" min="0" max="200" value="0" oninput="slider()"><font id="p8" class="top-right">0%</font></li>
+                <li>&#xf043;<font class="top-left">Invert</font><input id="s9" type="range" min="0" max="200" value="0" oninput="slider()"><font id="p9" class="top-right">0%</font></li>
+            </ul>     
+        </div>       
+        <button class="button">Templates</button>
+        <div class="box" style="margin-bottom: 10px;">
+            <p>Wooden</p>
+            <div id="wooden" class="frame-box"></div>
+            <p>Cool</p>
+            <div id="cool" class="frame-box"></div>
+            <p>Art</p>
+            <div id="art" class="frame-box"></div>
+            <p>Design</p>
+            <div id="design" class="frame-box"></div>
+            <p>Colourful</p>
+            <div id="colorful" class="frame-box"></div>
+        </div>
+        </main>
+        <!-- <audio id="swipe">
+            <source src="https://dl.dropbox.com/s/arhlytenp5i0p0b/zapsplat_cartoon_fast_whoosh_swipe_whip_002_77033.mp3" type="audio/mpeg">
+            <source src="https://dl.dropbox.com/s/arhlytenp5i0p0b/zapsplat_cartoon_fast_whoosh_swipe_whip_002_77033.ogg" type="audio/ogg">
+        </audio> -->
+        <script>      
+            function slider(){
+                var data = [];
+                for (let i=1;i<12;i++){
+                    var mySlider = document.querySelector("#s"+i);
+                    var myPercent = document.querySelector("#p"+i);
+                    var Percent = Math.round((mySlider.value / mySlider.max) *100) + "%";
+                    var txtRep = Math.round((mySlider.value / mySlider.max) *100) + "%";
+                    if (i == 7){
+                        var txtRep = Math.round(mySlider.value) + "°";
+                    }
+                    else if (i == 6){
+                        var txtRep = Math.round(mySlider.value) + "px";
+                    }
+                    else if (i == 10){
+                        var txtRep = Math.round(mySlider.value)+ 10 + "px";
+                    }
+                    else if (i == 11){
+                        var txtRep = Math.round(mySlider.value);
+                    }
+                    mySlider.style.background = "linear-gradient(to right, #ffe600 "+Percent+", #fff "+Percent+")";
+                    myPercent.innerHTML = txtRep;
+                    data.push(mySlider.value);
+
+                }
+                document.querySelector("#image").style.filter = "brightness("+data[0]+"%) " + "grayscale("+data[4]+"%) " + "hue-rotate("+data[6]+"deg) " +"saturate("+data[2]+"%) " + "contrast("+data[1]+"%) " + "sepia("+data[7]+"%) " + "invert("+data[8]+"%) " + "blur("+data[5]+"px) " + "opacity("+data[3]+"%)";
+                var fontcolor = document.querySelector("#s12").value;
+                data.push(fontcolor);
+                data[9] = parseInt(data[9])+10;
+                var created_txt = document.querySelectorAll(".createdTxt");
+                for (let i=0;i<created_txt.length;i++){
+                    if (i == (created_txt.length-1)) {
+                        created_txt[i].style.fontSize = data[9]+"px";
+                        created_txt[i].style.fontWeight = data[10];
+                        created_txt[i].style.color = data[11];
+                    }
+                }
+            }
+            slider();
+            function randomNumber(min=0, max=255) {  
+                min = Math.ceil(min); 
+                max = Math.floor(max); 
+                return Math.floor(Math.random() * (max - min + 1)) + min; 
+            } 
+            var colour = ["rgb(138,43,226,0.3)","rgb(255,255,255,0.3)","rgb(255,0,0,0.3)","rgb(140,130,67,0.4)","rgb(0,255,255,0.3)","rgb(255,205,0,0.3)","rgb(255,255,255,0.2)","rgb(0,0,0,0.4)","rgb(255,218,185,0.3)","rgb(123,104,238,0.3)"];            
+            for (let i=0;i<20;i++){
+                colour.push("rgb("+randomNumber()+","+randomNumber()+","+randomNumber()+",0."+randomNumber(3,6)+")");
+}
+            var fNum;
+            globalThis.fNum = 0; 
+            function customFilter(brightness=100,contrast=100,saturation=100,opacity=100,grayscale=0,blur=0,hue=360,sepia=0,invert=0){                
+                var newImage = document.createElement("img");
+                    newImage.src = document.querySelector("#image").src;
+                    newImage.classList.add("f-image");
+                    var main = document.createElement("div");                    
+                    main.classList.add("f-mn");
+                    main.id = "f"+fNum+100;
+                    var filters = "brightness("+brightness+"%) " + "grayscale("+grayscale+"%) " + "hue-rotate("+hue+"deg) " +"saturate("+saturation+"%) " + "contrast("+contrast+"%) " + "sepia("+sepia+"%) " + "invert("+invert+"%) " + "blur("+blur+"px) " + "opacity("+opacity+"%)";
+                    
+                    newImage.style.filter = filters;                    
+                    fNum += 1;
+                     main.addEventListener("click", function() {document.querySelector("#image").style.filter=filters ;document.querySelector("#mn").style.background = "none";});
+                    main.appendChild(newImage);
+                    document.querySelector("#f-box").appendChild(main);
+                
+                
+            }
+            customFilter();
+            customFilter(100,100,100,100,100,0,360,0,0);
+             function filter(color,num){
+                    fNum += 1;
+                    function addFilter(color){
+                    document.querySelector("#mn").style.background = color;
+                    document.querySelector("#image").style.filter = "none";
+                }
+                    var newImage = document.createElement("img");
+                    newImage.src = document.querySelector("#image").src;
+                    newImage.classList.add("f-image");
+                    var main = document.createElement("div");
+                    main.style.background = color;
+                    main.classList.add("f-mn");
+                    main.id = "f"+fNum;                    
+                    main.addEventListener("click", function() {addFilter(color);});
+                    main.appendChild(newImage);
+                    document.querySelector("#f-box").appendChild(main);
+                } 
+              
+            for (let i=0;i<colour.length;i++){            
+                filter(colour[i],fNum);                              
+            } 
+                                  
+            for (let i=0;i<colour.length;i++){                                                
+                    customFilter(100,100,100,100,0,0,randomNumber (0,360),0,100);
+                    customFilter(120,160,160,100,0,0,randomNumber (0,360),0,200);  
+             }   
+            
+            var frameNum;
+            globalThis.frameNum = -1;
+            var frameData = [["https://th.bing.com/th/id/OIP.Zdstw-cNZdmBoKNTXrX2YQHaKe?w=143&h=202&c=7&r=0&o=5&dpr=1.5&pid=1.7","30","round"],["https://th.bing.com/th/id/OIP.BqHDDEPsTKW4P4XdkXq3MwHaHa?w=154&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7","30","round"],["https://th.bing.com/th/id/OIP.SK7NFYqUsqQmPLf8Uq-EPAHaHa?pid=ImgDet&w=178&h=178&c=7&dpr=1.5","60","round"],["https://th.bing.com/th/id/OIP.qhqgB88BwP0CDPIiju4r1AHaE7?w=290&h=193&c=7&r=0&o=5&dpr=1.5&pid=1.7","30","round"],["https://th.bing.com/th/id/OIP.iIH3OGpXNOrrm5IUuFDg8wHaEo?w=259&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7","30","round"],["https://th.bing.com/th/id/OIP.lrmXRP9YsQ-WU5I8PP_kEgHaEK?w=333&h=187&c=7&r=0&o=5&dpr=1.5&pid=1.7","20","round"],["https://th.bing.com/th/id/OIP.6lBrWqr0vMVJbZFQuolcAQHaEL?w=316&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7","30","round"],["https://th.bing.com/th/id/OIP.O3eGD4WL5fnsTxjtuMVrHAHaL7?pid=ImgDet&rs=1","70","round"],["https://www.w3schools.com/cssref/border.png","20","stretch"],["https://th.bing.com/th/id/OIP.o0HdzbGk9PLukaXVM1LvXAHaKx?pid=ImgDet&rs=1","50","round"],["https://th.bing.com/th/id/OIP.rfGwgMl1_6ZwhlQckX3m6gHaHr?w=166&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7","20","round"],["https://th.bing.com/th/id/OIP.u0NJtlKzrdO9B8yxGAnEKgHaHV?w=160&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7","40","stretch"],["https://th.bing.com/th/id/OIP.FmEyzQjYrVfAvlSACgnHFAHaEA?w=307&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7","20","round"],["https://th.bing.com/th/id/OIP.oq2kX0HZ5qd_ZOGVYZNxKwHaEo?w=275&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7","20","stretch"],["https://c.wallhere.com/photos/cc/46/fractal_abstract_shapes_colorful-225207.jpg!d","30","round"],["https://th.bing.com/th/id/OIP.hKiVqp6NcBNm7o7lDMwt7wHaEo?w=265&h=180&c=7&r=0&o=5&dpr=1.5&pid=1.7","20","round"]];
+            function frame(url,expand,type,round="false"){
+                frameNum += 1;
+                var names = ["#wooden","#cool","#art","#design","#colorful"];
+                //alert(frameNum)
+                if ((frameNum<4)&&(frameNum>=0)){
+                    var fname_id = names[0];
+                }
+                else if ((frameNum<7)&&(frameNum>=4)){
+                    var fname_id = names[1];
+                }
+                else if ((frameNum<10)&&(frameNum>=7)){
+                    var fname_id = names[2];
+                }
+                else if ((frameNum<13)&&(frameNum>=10)){
+                    var fname_id = names[3];
+                }
+                else if ((frameNum<16)&&(frameNum>=13)){
+                    var fname_id = names[4];
+                }
+                var box = document.querySelector(fname_id);
+                var main = document.querySelector("#mn");
+                function addframe(borderData){
+                    main.style.border = "solid 10px transparent";
+                    main.style.borderImage = `url(${url}) ${expand} ${type}`;
+                }
+                var frame = document.createElement("div");
+                var img = document.createElement("img");
+                img.src = document.querySelector("#image").src;
+                frame.classList.add("frame");
+                frame.id = "frame"+frameNum;
+                borderimg = `url(${url}) ${expand} ${type}`;
+                frame.style.borderImage = borderimg;
+                frame.addEventListener("click", function() {addframe(borderimg)});
+                frame.appendChild(img);
+                box.appendChild(frame);
+            }          
+            //alert(frameData)
+            for (let i of frameData) {
+                frame(i[0],i[1],i[2]);
+            }
+            //autosizeInput(document.querySelectorAll(".createdTxt"))
+function loader() {
+document.querySelector("#l-box").style.display = "none";
+document.querySelector("body").style.overflow = "auto";
+Swal.fire({
+  background: '#5C5076',
+  html: '<h1 style="font-family:Fontawesome;font-size:60px;"><img src="https://i.pinimg.com/originals/60/59/3e/60593e973b506fa462bf2048625cb1fb.gif" style="height:180px;width:250px;"></h1><h2 style="color:rgb(255,255,255,0.8)">Features 💡</h2><br><div style="text-align:left;font-weight:bolder; color:rgb(255,255,255,0.7);">1. Filters (50+)<br>2. Tools<pre style="font-weight:600;color:rgb(255,255,255,0.6)"> • Rotate<br> • Zoom <br> • Upload Image and Edit<br> • Add text(Dragable)</pre>3. Upload Image and Edit<br>4. Effects<br>5. Templates</div>',
+});        
+};
+function Alert1() {
+Swal.fire({
+    background: '#36454F',
+    html: '<h1 style="color:#fff">Hope you are enjoying the code ...😃</h1>',
+});   
+ 
+}            
+$(window).on('load', function () {
+    setTimeout(loader, 3000);
+});            
+        </script>
+    </body>
+</html>
